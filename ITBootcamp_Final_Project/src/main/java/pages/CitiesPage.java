@@ -16,38 +16,51 @@ public class CitiesPage {
         this.driver = driver;
     }
 
-    public WebElement getNewItemButton(){
+    public WebElement getNewItemButton() {
         return driver.findElement(By.className("btnNewItem"));
     }
-    public WebElement getSearchInput(){
+
+    public WebElement getNewItemDialogueInputName() {
+        return driver.findElement(By.id("name"));
+    }
+
+    public WebElement getSearchInput() {
         return driver.findElement(By.id("search"));
     }
-    public void waitForDialogEditToBeVisible(){
+
+    public void waitForDialogNewItemEditToBeVisible() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dlgNewEditItem")));
     }
-    public void waitForDialogDeleteToBeVisible(){
+
+    public void waitForDialogDeleteToBeVisible() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("warning")));
     }
-    public WebElement getSaveButtonFromEditDialogue(){
+
+    public WebElement getSaveButtonFromEditDialogue() {
         return driver.findElement(By.className("btnSave"));
     }
-    public WebElement getDeleteButtonFromDeleteDialogue(){
-        return driver.findElement(By.xpath("//button[contains(@class, 'v-btn v-btn--flat v-btn--text theme--light v-size--default red--text text--lighten3')]"));
+
+    public WebElement getDeleteButtonFromDeleteDialogue() {
+        return driver.findElement(By.xpath("//span[contains(text(), ' Delete')]"));
     }
-    public void waitForNumOfRowsToBe(int rowNum){
+
+    public void waitForNumOfRowsToBe(int rowNum) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//tbody/tr"), rowNum));
     }
-    public WebElement cellInRow(int rowIndex, int cellIndex){
-      return driver.findElement(By.xpath("//tbody/tr["+rowIndex+"]/td["+cellIndex+"]"));
+
+    public WebElement getcellInRow(int rowIndex, int cellIndex) {
+        return driver.findElement(By.xpath("//tbody/tr[" + rowIndex + "]/td[" + (cellIndex - 1) + "]"));
 
     }
-    public WebElement getEditButton(int rowNum){
+
+    public WebElement getEditButton(int rowNum) {
         return driver.findElements(By.id("edit")).get(rowNum);
     }
-    public WebElement getDeleteButton(int rowNum){
+
+    public WebElement getDeleteButton(int rowNum) {
         return driver.findElements(By.id("delete")).get(rowNum);
     }
 
