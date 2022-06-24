@@ -3,6 +3,10 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginPage {
     private WebDriver driver;
@@ -20,7 +24,22 @@ public class LoginPage {
     }
 
     public WebElement getLoginButton() {
-        return driver.findElement(By.xpath("//div[contains(@class, 'flex text-xs-center mt-5 mb-3')]/button"));
+        return driver.findElement(By.xpath("//*[@type = 'submit']"));
+    }
+
+    public void waitForTheTextToBeWrongPassword(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.textToBe(By.xpath("//div[@role='status']/ul/li"), "Wrong password") );
+    }
+
+    public void waitForTheTextToBeUserDoesNotExists() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.textToBe(By.xpath("//div[@role='status']/ul/li"), "User does not exists"));
+    }
+
+    public void waitUntilHomeAppearsInUrl(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.urlContains("/home"));
     }
 
 }

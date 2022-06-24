@@ -28,24 +28,28 @@ public class MessagePopUpPage {
         return driver.findElement(By.xpath("//button[contains(@class, 'btnSave v-btn v-btn--flat v-btn--text theme--light v-size--default green--text text--lighten3')]"));
     }
 
-    public WebElement getErrorPopUp() {
-        return driver.findElement(By.xpath("//div[@role='status']/ul/li"));
-    }
+//    //public WebElement getErrorPopUp() {
+//        return driver.findElement(By.xpath("//div[@role='status']/ul/li"));
+//    }
 
     public void waitForThePopUpDialogue() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("v-snack__content")));
     }
-
-    public WebElement getSuccessDialogue() {
-        return driver.findElement(By.xpath("//div[contains(@class, 'v-snack__wrapper v-sheet theme--dark success')]/div"));
-    }
-
-    public WebElement getVerifyYourAccountText() {
-        return driver.findElement(By.xpath("//div[contains(@class, 'v-card__title')]"));
-    }
+//
+//    public WebElement getSuccessDialogue() {
+//        return driver.findElement(By.xpath("//div[contains(@class, 'v-snack__wrapper v-sheet theme--dark success')]/div"));
+//    }
+//
+//    public WebElement getVerifyYourAccountText() {
+//        return driver.findElement(By.xpath("//div[contains(@class, 'v-card__title')]"));
+//    }
 
     public WebElement getCloseDialogueButton() {
         return driver.findElement(By.xpath("//button[contains(@class, 'btnClose ')]"));
+    }
+    public void waitForTheCloseButtonToBeClickable(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class, 'btnClose')]/span")));
     }
 }

@@ -4,12 +4,12 @@ import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class AdminCitiesTest extends BasicTest{
+public class AdminCitiesTest extends BasicTest {
 
 
-    @Test (priority = 10)
+    @Test(priority = 10)
 
-    public void visitsAdminCitiesPageAndListCities (){
+    public void visitsAdminCitiesPageAndListCities() {
         navPage.getLoginLink().click();
 
         login.getEmailInput().sendKeys("admin@admin.com");
@@ -26,22 +26,26 @@ public class AdminCitiesTest extends BasicTest{
 
     }
 
-    @Test (priority = 20)
+    @Test(priority = 20)
 
-    public void  checksInputTypesForCreateEditNewCity(){
+    public void checksInputTypesForCreateEditNewCity() {
+
         navPage.getAdminButton().click();
         navPage.getCitiesButton().click();
+
         cities.getNewItemButton().click();
         cities.waitForDialogNewItemEditToBeVisible();
+
         Assert.assertEquals(
                 cities.getNewItemDialogueInputName().getAttribute("type"),
                 "text",
                 "ERROR - expected type is text.");
     }
 
-    @Test (priority = 30)
+    @Test(priority = 30)
 
-    public void createNewCity() throws InterruptedException {
+    public void createNewCity() {
+
         navPage.getAdminButton().click();
         navPage.getCitiesButton().click();
 
@@ -51,16 +55,14 @@ public class AdminCitiesTest extends BasicTest{
         cities.getSaveButtonFromEditDialogue().click();
 
         messagePopUp.waitForThePopUpDialogue();
-        Thread.sleep(4000);
 
-               Assert.assertTrue(
-                messagePopUp.getSuccessDialogue().getText().contains("Saved successfully"),
-                "ERROR - text should contain 'Saved successfully'");
+        cities.waitForTheTextToBeSavedSuccessfully();
 
-            }
+    }
 
-    @Test (priority = 40)
-    public void editCity() throws InterruptedException {
+    @Test(priority = 40)
+    public void editCity() {
+
         navPage.getAdminButton().click();
         navPage.getCitiesButton().click();
 
@@ -70,22 +72,20 @@ public class AdminCitiesTest extends BasicTest{
 
         messagePopUp.waitForTheEditCityDialogue();
         String s = Keys.chord(Keys.CONTROL, "a");
+
         messagePopUp.getTextInputEditCityDialogue().sendKeys(s);
         messagePopUp.getTextInputEditCityDialogue().sendKeys("GRAD");
         messagePopUp.getSaveCityButtonEditDialogue().click();
-        Thread.sleep(4000);
+
+
         messagePopUp.waitForThePopUpDialogue();
-
-        Assert.assertTrue(
-                messagePopUp.getSuccessDialogue().getText().contains("Saved successfully"),
-                "ERROR - text should contain 'Saved successfully'");
-
+        cities.waitForTheTextToBeSavedSuccessfully();
 
     }
 
-   @Test (priority = 50)
+    @Test(priority = 50)
 
-    public void searchCity() throws InterruptedException {
+    public void searchCity() {
         navPage.getAdminButton().click();
         navPage.getCitiesButton().click();
 
@@ -99,9 +99,10 @@ public class AdminCitiesTest extends BasicTest{
 
     }
 
-    @Test (priority = 60)
+    @Test(priority = 60)
 
-    public void deleteCity() throws InterruptedException {
+    public void deleteCity() {
+
         navPage.getAdminButton().click();
         navPage.getCitiesButton().click();
 
@@ -116,14 +117,13 @@ public class AdminCitiesTest extends BasicTest{
         cities.getDeleteButton(0).click();
         cities.waitForDialogDeleteToBeVisible();
         cities.getDeleteButtonFromDeleteDialogue().click();
+
         messagePopUp.waitForThePopUpDialogue();
-        Thread.sleep(4000);
 
-        Assert.assertTrue(
-                messagePopUp.getSuccessDialogue().getText().contains("Deleted successfully"),
-        "ERROR - message should be 'Deleted successfully'");
+        cities.waitForTheTextToBeDeletedSuccessfully();
+
+
     }
-
 
 
 }

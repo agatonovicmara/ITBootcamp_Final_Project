@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.List;
 
 public class CitiesPage {
     private WebDriver driver;
@@ -62,6 +61,20 @@ public class CitiesPage {
 
     public WebElement getDeleteButton(int rowNum) {
         return driver.findElements(By.id("delete")).get(rowNum);
+    }
+
+    public void waitForTheTextToBeSavedSuccessfully() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(
+                By.xpath("//div[contains(@class, 'v-snack__wrapper v-sheet theme--dark success')]/div"),
+                "Saved successfully"));
+    }
+
+    public void waitForTheTextToBeDeletedSuccessfully() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(
+                By.xpath("//div[contains(@class, 'v-snack__wrapper v-sheet theme--dark success')]/div"),
+                "Deleted successfully"));
     }
 
 

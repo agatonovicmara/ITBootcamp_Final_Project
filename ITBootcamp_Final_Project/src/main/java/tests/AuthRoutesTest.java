@@ -3,45 +3,48 @@ package tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class AuthRoutesTest extends BasicTest{
+public class AuthRoutesTest extends BasicTest {
 
     @Test(priority = 10)
 
-    public void ForbidVisitsToHomeUrlIfNotAuthenticated (){
+    public void ForbidVisitsToHomeUrlIfNotAuthenticated() {
         driver.get(baseUrl + "/home");
-        Assert.assertTrue(driver.getCurrentUrl().contains("/login"),
+        Assert.assertTrue(
+                driver.getCurrentUrl().contains("/login"),
                 "Error, there should be '/login' route"
         );
 
     }
 
-    @Test (priority = 20)
+    @Test(priority = 20)
 
-    public void  ForbidVisitsToProfileUrlIfNotAuthenticated(){
+    public void ForbidVisitsToProfileUrlIfNotAuthenticated() {
         driver.get(baseUrl + "/profile");
-        Assert.assertTrue(driver.getCurrentUrl().contains("/login"),
+        Assert.assertTrue(
+                driver.getCurrentUrl().contains("/login"),
                 "Error, there should be '/login' route"
         );
     }
 
-    @Test (priority = 30)
+    @Test(priority = 30)
 
-    public void ForbidVisitsToAdminCitiesUrlIfNotAuthenticated(){
+    public void ForbidVisitsToAdminCitiesUrlIfNotAuthenticated() {
         driver.get(baseUrl + "/admin/cities");
-        Assert.assertTrue(driver.getCurrentUrl().contains("/login"),
+        Assert.assertTrue(
+                driver.getCurrentUrl().contains("/login"),
                 "Error, there should be '/login' route"
         );
     }
 
-    @Test (priority = 40)
+    @Test(priority = 40)
 
-    public void ForbidsVisitsToAdminUsersUrlIfNotAuthenticated(){
+    public void ForbidsVisitsToAdminUsersUrlIfNotAuthenticated() {
         driver.get(baseUrl + "/admin/users");
-        Assert.assertTrue(driver.getCurrentUrl().contains("/login"),
+        Assert.assertTrue(
+                driver.getCurrentUrl().contains("/login"),
                 "Error, there should be '/login' route"
         );
     }
-
 
 
 }
